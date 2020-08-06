@@ -1,0 +1,67 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons *ngIf="!showSearchbar" slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-segment *ngIf="ios" [(ngModel)]="segment">
+      <ion-segment-button value="meet-us">
+        Meet Fitness Seed
+      </ion-segment-button>
+      <ion-segment-button value="work-with-us">
+        Work With Us
+      </ion-segment-button>
+      
+    </ion-segment>
+    <ion-title *ngIf="!ios && !showSearchbar">Contact Us</ion-title>
+    <ion-searchbar *ngIf="showSearchbar" showCancelButton="always" [(ngModel)]="queryText" (ionCancel)="showSearchbar = false" placeholder="Search"></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="!ios && !showSearchbar" (click)="showSearchbar = true">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="!showSearchbar">
+        <span *ngIf="ios">Filter</span>
+        <span *ngIf="!ios">
+          <ion-icon slot="icon-only" name="options"></ion-icon>
+        </span>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="!ios">
+    <ion-segment [(ngModel)]="segment" >
+      <ion-segment-button value="meet-us">
+        Meet Fitness Seed
+      </ion-segment-button>
+      <ion-segment-button value="work-with-us">
+        Work With Us
+      </ion-segment-button>
+      
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Videos</ion-title>
+    </ion-toolbar>
+    <ion-toolbar>
+      <ion-searchbar [(ngModel)]="queryText"  placeholder="Search"></ion-searchbar>
+    </ion-toolbar>
+  </ion-header>
+  <div [ngSwitch]="segment">
+
+    <ion-list *ngSwitchCase="'meet-us'">
+        <ion-item>
+           <app-meet-fitness-seed></app-meet-fitness-seed>
+        </ion-item>
+    </ion-list>
+    
+    <ion-list *ngSwitchCase="'work-with-us'">
+        <ion-item>
+           <app-work-with-fitness-seed></app-work-with-fitness-seed>
+        </ion-item>
+    </ion-list>
+    
+    </div>
+    
+</ion-content>

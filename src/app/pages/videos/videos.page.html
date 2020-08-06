@@ -1,0 +1,62 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons *ngIf="!showSearchbar" slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-segment *ngIf="ios" [(ngModel)]="segment">
+      <ion-segment-button value="upper-body">
+        Upper Body
+      </ion-segment-button>
+      <ion-segment-button value="lower-body">
+        Lower Body
+      </ion-segment-button>
+      <ion-segment-button value="challenges">
+        Challenges
+      </ion-segment-button>
+    </ion-segment>
+    <ion-title *ngIf="!ios && !showSearchbar">Videos</ion-title>
+    <ion-searchbar *ngIf="showSearchbar" showCancelButton="always" [(ngModel)]="queryText" (ionCancel)="showSearchbar = false" placeholder="Search"></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="!ios && !showSearchbar" (click)="showSearchbar = true">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="!showSearchbar">
+        <span *ngIf="ios">Filter</span>
+        <span *ngIf="!ios">
+          <ion-icon slot="icon-only" name="options"></ion-icon>
+        </span>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="!ios">
+    <ion-segment [(ngModel)]="segment" (ionChange)="updateVideos($event)">
+      <ion-segment-button value="upper-body">
+        Upper Body
+      </ion-segment-button>
+      <ion-segment-button value="lower-body">
+        Lower Body
+      </ion-segment-button>
+      <ion-segment-button value="challenges">
+        Challenges
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Videos</ion-title>
+    </ion-toolbar>
+    <ion-toolbar>
+      <ion-searchbar [(ngModel)]="queryText"  placeholder="Search"></ion-searchbar>
+    </ion-toolbar>
+  </ion-header>
+  <ion-row [ngSwitch]="segment">
+    <ion-col size="12">
+      <app-upper-body *ngSwitchCase="'upper-body'" ></app-upper-body>
+      <app-lower-body *ngSwitchCase="'lower-body'"></app-lower-body>
+      <app-challenges *ngSwitchCase="'challenges'"></app-challenges>
+    </ion-col>
+    </ion-row>
+</ion-content>

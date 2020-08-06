@@ -1,0 +1,30 @@
+
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Gallery</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-lg="4" size-sm="6" size-xs="12"
+          *ngFor="let photo of photoService.photos; index as position">
+        <!-- <ion-card class="ion-no-padding">
+          <ion-card-content class="ion-no-padding"> -->
+            <ion-img *ngIf="photo.filepath" src="{{ photo.base64 ? photo.base64 : photo.webviewPath }}">
+            </ion-img>
+          <!-- </ion-card-content>
+        </ion-card> -->
+      
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button (click)="addPhotoToGallery()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

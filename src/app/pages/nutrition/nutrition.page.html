@@ -1,0 +1,29 @@
+
+
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Nutrition</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid>
+
+    <ion-row class="ion-align-items-center">
+      <ion-col *ngFor="let item of items" size-lg="4" size-sm="6" size-xs="12">
+        <ion-card style="height: 20rem;" >
+          <ion-card-header>
+            <ion-card-title class="ion-text-center">{{item.title}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="ion-text-wrap">
+            {{item.description}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+     
+    </ion-row>
+  
+  </ion-grid>
+</ion-content>
