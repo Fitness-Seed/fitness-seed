@@ -1,3 +1,4 @@
+import { TipsComponent } from './tips/tips.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +16,7 @@ import { NutritionPage } from './nutrition.page';
     IonicModule,
     NutritionPageRoutingModule
   ],
-  declarations: [NutritionPage]
+  declarations: [NutritionPage, TipsComponent],
+  entryComponents: [TipsComponent]
 })
 export class NutritionPageModule {}

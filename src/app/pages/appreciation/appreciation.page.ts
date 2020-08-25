@@ -6,7 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./appreciation.page.scss'],
 })
 export class AppreciationPage implements OnInit {
-
+  items = [
+    {title: 'nice app'}
+  ];
   constructor() { }
 
   ngOnInit() {

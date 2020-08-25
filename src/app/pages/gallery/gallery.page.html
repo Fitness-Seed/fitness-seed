@@ -9,22 +9,36 @@
     </ion-toolbar>
   </ion-header>
   <ion-grid>
-    <ion-row>
+    <ion-row *ngIf="isLoading">
+      <ion-col >
+        <ion-spinner ></ion-spinner>
+      </ion-col>
+    </ion-row>
+    <ion-row  *ngIf="images.length > 0">
+     
       <ion-col size-lg="4" size-sm="6" size-xs="12"
-          *ngFor="let photo of photoService.photos; index as position">
-        <!-- <ion-card class="ion-no-padding">
-          <ion-card-content class="ion-no-padding"> -->
-            <ion-img *ngIf="photo.filepath" src="{{ photo.base64 ? photo.base64 : photo.webviewPath }}">
+          *ngFor="let photo of images; let i = index;">
+            <ion-img *ngIf="photo?.url" src="{{ photo?.url }}" tappable ="true" (click)="openPreview(photo, i)">
             </ion-img>
-          <!-- </ion-card-content>
-        </ion-card> -->
-      
+
+      </ion-col>
+      <!-- <ion-col>
+        <ion-slides [options]="slidesOpts">
+          <ion-slide *ngFor="let photo of images; index as position">
+            <img [src]="photo.url" tappable ="true" (click)="openPreview(photo)"/>
+          </ion-slide>
+        </ion-slides>
+      </ion-col> -->
+    </ion-row>
+    <ion-row  vertical="center"  horizontal="center" class="ion-align-items-center ion-align-self-center ion-justify-content-center" *ngIf="photoService?.photos?.length == 0">
+      <ion-col size="12" class="ion-align-items-center ion-align-self-center ion-justify-content-center">
+          <p class="ion-text-center">No Photos in the Gallery</p>
       </ion-col>
     </ion-row>
   </ion-grid>
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button (click)="addPhotoToGallery()">
-      <ion-icon name="camera"></ion-icon>
+    <ion-fab-button (click)="presentModal()">
+      <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

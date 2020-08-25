@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar class="toolbarTag">
+    <ion-buttons slot="start">
+      <ion-button  expand="block" (click)="dismiss()" routerDirection="backward">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{subCategory?.title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-no-padding">
+  <ion-grid class="ion-no-padding">
+    <!-- single row contain 2 columns of equal lenght due to size=6  -->
+    <ion-row class="ion-no-padding" *ngIf="videos?.length > 0">
+      <ion-col *ngFor="let video of videos" size="6" class="ion-padding">
+        <ion-item>
+          <ion-label>{{video?.title}}</ion-label>
+        </ion-item>
+        <video style="width:100%;" controls controlsList="nodownload">
+          <source [src]="url(video.url)" type="video/mp4">
+          <source [src]="url(video.url)" type="video/ogg">
+            Your browser does not support the video tag.
+        </video>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-no-padding" *ngIf="videos?.length == 0">
+      <ion-col class="ion-padding">
+        <p>No videos in this category</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

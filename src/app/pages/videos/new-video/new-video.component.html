@@ -1,55 +1,57 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button color="danger" (click)="dismiss()">
-        <span ion-text color="danger" showWhen="ios"></span>
-        <ion-icon name="close-outline" showWhen="android,windows"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Upload Video</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-grid class="ion-align-items-center">
+<ion-content >
+  <ion-header slot="fixed" translucent>
+    <ion-toolbar>
+      <ion-title>Video Upload</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="dismiss()">
+          <!-- <ion-icon color="danger" slot="icon-only" name="close-outline"></ion-icon> -->
+          CLOSE
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid style="overflow: hidden !important;">
     <ion-row>
       <ion-col>
-        <ion-list lines="full" class="ion-no-margin ion-no-padding">
-          <ion-item>
-            <ion-label position="stacked">First Name <ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="stacked">Last Name <ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required type="text" oninput="handleLastNameValue(event)"></ion-input>
-          </ion-item>
-          
-          <ion-item>
-            <ion-label position="floating">Title</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="stacked">Address</ion-label>
-            <ion-input placeholder="Address Line 1"></ion-input>
-            <ion-input placeholder="Address Line 2"></ion-input>
-            <ion-input placeholder="City"></ion-input>
-            <ion-input placeholder="State"></ion-input>
-            <ion-input placeholder="Zip Code"></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="stacked">Notes</ion-label>
-            <ion-textarea></ion-textarea>
-          </ion-item>
-        </ion-list>
-
-        <div class="ion-padding">
-          <ion-button expand="block" type="submit" class="ion-no-margin">Create account</ion-button>
-        </div>
+        <form [formGroup]="newVideoForm" (ngSubmit)="save()" class="login-form ion-margin-top" style="margin-top: 50px">
+          <ion-list lines="none">
+            <ion-item>
+              <ion-label>Sub Category</ion-label>
+              <ion-select formControlName="subCategoryId" class="text-secondary">
+                <ion-select-option *ngFor="let sub of categories" [value]="sub.id">
+                  {{ sub.title }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <!-- <ion-label>Title</ion-label> -->
+              <ion-input formControlName="title" type="text" placeholder="Enter Video Title"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-textarea formControlName="description" placeholder="Enter video description" cols="10" rows="3"></ion-textarea>
+            </ion-item>
+            <div class="ion-margin-vertical ion-text-right">
+              <ion-button mode="ios" expand="block" class="file">
+                <ion-icon lazy="true" slot="start" name="images"></ion-icon>
+                <ion-label slot="end">Upload Video</ion-label>
+                <input type="file" (change)="loadVideoFromDevice($event)" id="file-input"
+                  accept="video/*">
+              </ion-button>
+              
+            </div>
+            <ion-progress-bar color="primary" [value]="uploadProgress | async"></ion-progress-bar>
+          </ion-list>
+          <div class="ion-margin-vertical ion-text-right">
+            <ion-button type="button" (click)="dismiss()" mode="ios" color="medium">
+              Cancel
+            </ion-button>
+            <ion-button mode="ios" type="submit" [disabled]="newVideoForm.invalid || saving" color="primary">
+              Submit
+            </ion-button>
+          </div>
+        </form>
       </ion-col>
     </ion-row>
-    
- </ion-grid>
+  </ion-grid>
+
 </ion-content>

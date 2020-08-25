@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: GalleryPage
+  },
+  {
+    path: 'image-modal',
+    loadChildren: () => import('./image-modal/image-modal.module').then( m => m.ImageModalPageModule)
   }
 ];
 

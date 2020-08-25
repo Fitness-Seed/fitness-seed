@@ -1,0 +1,23 @@
+ion-content{
+  transition: none;
+  height: 300px;
+  ion-button{
+      height: 100%;
+      div{
+          padding:7px 5px;
+          color: white;
+          bottom: 0px;
+          position: absolute;
+          width: 100%;
+          background: rgba(6, 110, 237, 0.282);
+          h4{
+              font-size: 22px;
+              margin: 0;
+          }
+      }
+  }
+}
+.view-videos{
+  transition: none;
+  height: 300px;
+}

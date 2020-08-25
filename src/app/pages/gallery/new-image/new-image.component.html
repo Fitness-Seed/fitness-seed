@@ -1,0 +1,56 @@
+<ion-content fullscreen="true">
+  <ion-header slot="fixed" translucent>
+    <ion-toolbar>
+      <ion-title>Image Upload</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="dismiss()">
+          <!-- <ion-icon color="danger" slot="icon-only" name="close-outline"></ion-icon> -->
+          CLOSE
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid style="height: 100%; overflow: hidden !important;">
+    <ion-row style="margin-top: 15%;" class="ion-no-padding">
+      <ion-col class="ion-no-padding">
+        <form class="login-form" [formGroup]="newImageForm" (ngSubmit)="save()">
+          <ion-list lines="none" class="ion-no-padding">
+            <ion-item>
+              <!-- <ion-label>Title</ion-label> -->
+              <ion-input formControlName="title" type="text" placeholder="Enter Image Title"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-textarea formControlName="description" placeholder="Enter Image description" cols="10" rows="3"></ion-textarea>
+            </ion-item>
+            <div class="ion-margin-vertical ion-text-right">
+              <div class="image-input image-input-outline" id="kt_image_3">
+                <div class="image-input-wrapper" style="background-image: url(assets/media/users/default.jpg)"></div>
+                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                  <i class="fa fa-pen icon-sm text-muted"></i>
+                  <input type="file" #fileInput (change)="loadImageFromDevice($event)" name="profile_avatar" accept=".png, .jpg, .jpeg" />
+                  <input type="hidden" name="profile_avatar_remove" />
+                </label>
+                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                  <i class="ki ki-bold-close icon-xs text-muted"></i>
+                </span>
+              </div>
+              <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
+              <ion-progress-bar color="primary" [value]="uploadProgress | async"></ion-progress-bar>
+            </div>
+          
+          </ion-list>
+          <div class="ion-margin-vertical ion-text-right">
+            <ion-button (click)="dismiss()" type="button" mode="ios" color="medium">
+              Cancel
+            </ion-button>
+            <ion-button mode="ios" type="submit" color="primary" [disabled]="newImageForm.invalid || saving">
+              Submit
+            </ion-button>
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

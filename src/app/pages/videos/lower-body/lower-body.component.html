@@ -1,3 +1,20 @@
-<p>
-  lower-body works!
-</p>
+<ion-row>
+  <ion-col *ngFor="let subCategory of category?.subCategories" size-lg="4" size-sm="6" size-xs="12">
+    <ion-card (click)="viewVideos(subCategory.id)" class="ion-justify-content-center ion-align-items-center ">
+      <img src="../../../../assets/img/speakers/iguana.jpg"/>
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">{{subCategory.title}}</ion-card-title>
+      </ion-card-header>
+      <!-- <ion-card-content>
+        <h4 class="ion-text-sm-left">{{category.title}}</h4>
+      </ion-card-content> -->
+    </ion-card>
+  </ion-col>
+
+</ion-row>
+
+  <ion-fab style="margin-bottom: 20px;" vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button (click)="uploadNewVideo()" >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>

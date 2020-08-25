@@ -1,0 +1,32 @@
+.close-fake {
+    --background: transparent;
+    ion-icon {
+        font-size: 2rem;;
+    }
+    margin-top: 30px;
+    img {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}
+ion-content {
+    --background: rgba(44,39,45,0.84)
+}
+ion-slides {
+   height: 100%;
+}
+.nextBtn, .prevBtn{
+    width:30px;
+    height: 40px;
+    background-color: gray;
+    font-size: 15px;
+    border-radius: 0;
+    top: 39%;
+    background-size: 14px 44px;
+}
+.nextBtn{
+    right: 13px;
+}
+.prevBtn{
+    left: -2px;
+}

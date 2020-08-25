@@ -1,0 +1,43 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>image-modal</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content fullscreen="true" class="image-modal">
+  <ion-grid style="height: 100%; overflow: hidden !important;">
+    <ion-row>
+      <ion-col>
+        <ion-item  lines="none" class="close-fake ion-text-center">
+          <ion-button (click)="close()" fill="clear" color="light">
+            <ion-icon name="close" slot="start"></ion-icon>
+            Back
+          </ion-button>
+          <ion-button (click)="zoom(true)" fill="clear" color="light">
+            <ion-icon name="add" slot="start"></ion-icon>
+            In
+          </ion-button>
+          <ion-button (click)="zoom(false)" fill="clear" color="light">
+            <ion-icon name="remove" slot="start"></ion-icon>
+            Out
+          </ion-button>
+        
+        </ion-item>
+        <ion-item style="height: 75%;">
+          <ion-button type="submit" fill="clear" color="light" class="swiper-button-prev swiper-button-white prevBtn"
+          (click)="prevSlide()"></ion-button>
+          <ion-slides  pager="true" [options]="slidesOpts" #slider>
+            <ion-slide *ngFor="let photo of images; index as position" class="ion-text-center">
+              <!-- <div class="swiper-zoom-container"></div> -->
+              <img [src]="photo?.url" style="width: 75%; height: 100%;"/>
+            </ion-slide>
+          </ion-slides>
+          <ion-button type="submit" fill="clear" color="light" class="swiper-button-next swiper-button-white nextBtn"
+          (click)="nextSlide()"></ion-button>
+        </ion-item>
+        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+</ion-content>

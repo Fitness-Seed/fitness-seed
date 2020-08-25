@@ -1,3 +1,6 @@
+import { VideoSubCategory } from './dto/video-sub-category-dto';
+import { VideoMainCategory } from './dto/video-main-category-dto';
+import { VideoService } from './../../services/videos/video.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonList, AlertController, LoadingController, ModalController, IonRouterOutlet, ToastController, Config } from '@ionic/angular';
 import { ConferenceData } from '../../providers/conference-data';
@@ -16,7 +19,9 @@ export class VideosPage implements OnInit {
   ios: boolean;
   dayIndex = 0;
   queryText = '';
-  segment = 'upper-body';
+  categories: VideoMainCategory[] = [];
+  selectedCategory: VideoMainCategory;
+  segment = 1;
   excludeTracks: any = [];
   shownSessions: any = [];
   groups: any = [];
@@ -31,23 +36,20 @@ export class VideosPage implements OnInit {
     public routerOutlet: IonRouterOutlet,
     public toastCtrl: ToastController,
     public user: UserData,
-    public config: Config
+    public config: Config,
+    private videoService: VideoService
   ) { }
 
   ngOnInit() {
     // this.updateVideos();
+    this.videoService.findAllCategories().subscribe(result => {
+      this.categories = result;
+      this.selectedCategory = this.categories.find(x => x.id === this.segment);
+    });
     this.ios = this.config.get('mode') === 'ios';
   }
-  updateVideos(event: CustomEvent) {
-    // Close any open sliding items when the schedule updates
-    // if (this.scheduleList) {
-    //   this.scheduleList.closeSlidingItems();
-    // }
 
-    // this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
-    //   this.shownSessions = data.shownSessions;
-    //   this.groups = data.groups;
-    // });
-    console.log(event.detail.value);
+  updateVideos(event: CustomEvent) {
+    this.selectedCategory = this.categories.find(x => x.id === Number.parseInt(this.segment.toString(), 10));
   }
 }
